@@ -1,8 +1,12 @@
-from flask import Flask
+from flask import Flask,request, jsonify
 import pandas as pd
 from flask import render_template
+from firebase_admin import credentials,firestore,initialize_app
 app = Flask(__name__,template_folder="templates")
-
+cred = credentials.Certificate('my-project1-e02f1-firebase-adminsdk-oe3n6-60f3d631b5.json')
+default_app = initialize_app(cred)
+db = firestore.client()
+todo_ref = db.collection('todos')
 file= "C:\\Users\\oso\\PycharmProjects\\WEB\\static\\email.csv"
 @app.route("/")
 def show_tables():
@@ -14,4 +18,5 @@ def show_tables():
      )
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(app.run(threaded=True, host='0.0.0.0', port=80)
+)
